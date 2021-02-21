@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_16mza1c" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <decision id="Genehmigung_erforderlich_DMN" name="Decision 1">
+    <decisionTable id="DecisionTable_1399ehy" hitPolicy="FIRST">
+      <input id="InputClause_07ncs4k" label="Amazon Rechnung" camunda:inputVariable="amazon">
+        <inputExpression id="LiteralExpression_1255x3o" typeRef="boolean">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="Input_1" label="Rechnungsbetrag" biodi:width="192" camunda:inputVariable="betrag">
+        <inputExpression id="InputExpression_1" typeRef="double">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Genehmigung" name="genehmigung_erforderlich" typeRef="boolean" />
+      <rule id="DecisionRule_1k32qsn">
+        <inputEntry id="UnaryTests_1ecu7zq">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wd6uai">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0unwesi">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xwlzjs">
+        <inputEntry id="UnaryTests_0nho11n">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fekkb3">
+          <text>&lt;= 50.00</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1djxk4p">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17izmba">
+        <inputEntry id="UnaryTests_1j6t3a4">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gt6075">
+          <text>&gt; 50.00</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0pvj0v8">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Genehmigung_erforderlich_DMN">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

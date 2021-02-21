@@ -1,0 +1,35 @@
+GET http://localhost:8080/engine-rest/process-definition/invoice:2:b6a51fdd-5386-11eb-93e1-a6c3f0466d06/diagram
+###
+GET http://localhost:8080/engine-rest/deployment
+###
+DELETE http://localhost:8080/engine-rest/deployment/502010fe-56b5-11eb-b306-a6c3f0466d06?cascade=true
+###
+POST http://localhost:8080/engine-rest/message/
+Content-Type: application/json
+
+{
+    "messageName" : "Message_3otc8vc",
+    "resultEnabled": true
+}
+###
+GET http://localhost:8080/engine-rest/process-instance/{id}/variables
+
+###
+GET http://localhost:8080/engine-rest/history/process-definition/cleanable-process-instance-report
+
+###
+GET http://localhost:8080/engine-rest/history/process-instance
+###
+POST http://localhost:8080/engine-rest/history/cleanup
+###
+GET http://localhost:8080/engine-rest/job
+###
+POST http://localhost:8080/engine-rest/job/7797def1-6e07-11eb-bea8-a6c3f0466d06/execute
+###
+PUT  http://localhost:8080/engine-rest/job/suspended
+Content-Type: application/json
+
+{
+ "jobDefinitionId" : "7797def1-6e07-11eb-bea8-a6c3f0466d06",
+  "suspended" : false
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0sdof2w" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:collaboration id="Collaboration_0aoxlzn">
+    <bpmn:participant id="Participant_041abbg" name="Verwaltung" processRef="Process_086aspy" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_086aspy" name="Mahnung_Bearbeiten" isExecutable="true">
+    <bpmn:exclusiveGateway id="Gateway_05ze6jz" name="Zahlung gefunden?" default="Flow_0i2o6ic">
+      <bpmn:incoming>Flow_1g9k8u9</bpmn:incoming>
+      <bpmn:outgoing>Flow_0i2o6ic</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1wrbix7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="Event_1kqlvh4" name="Zahlung der Rechnung nachgewiesen">
+      <bpmn:incoming>Flow_1kcxfbk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0i2o6ic" name="Nein" sourceRef="Gateway_05ze6jz" targetRef="Activity_1lo7mlr" />
+    <bpmn:sequenceFlow id="Flow_0u78861" sourceRef="Activity_1lo7mlr" targetRef="Event_0mkbdg2" />
+    <bpmn:sequenceFlow id="Flow_1kcxfbk" sourceRef="Activity_0nzakaf" targetRef="Event_1kqlvh4" />
+    <bpmn:sequenceFlow id="Flow_1wrbix7" name="Ja" sourceRef="Gateway_05ze6jz" targetRef="Activity_0nzakaf">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1g9k8u9" sourceRef="Activity_1be3po4" targetRef="Gateway_05ze6jz" />
+    <bpmn:sequenceFlow id="Flow_0noxv9u" sourceRef="Event_0r1w3vy" targetRef="Activity_1be3po4" />
+    <bpmn:manualTask id="Activity_1lo7mlr" name="Rechnung per E-Mail nachfordern">
+      <bpmn:incoming>Flow_0i2o6ic</bpmn:incoming>
+      <bpmn:outgoing>Flow_0u78861</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Activity_0nzakaf" name="Zahlungsbestätigung vorweisen">
+      <bpmn:incoming>Flow_1wrbix7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kcxfbk</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:startEvent id="Event_0r1w3vy" name="Zahlungserinnerung oder Mahnung eingegangen">
+      <bpmn:outgoing>Flow_0noxv9u</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1sp9az1" messageRef="Message_1qz34gl" />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0mkbdg2" name="Rechnung angefordert">
+      <bpmn:incoming>Flow_0u78861</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:manualTask id="Activity_1be3po4" name="Suchen der Rechnung im DMS oder bei laufenden Instanzen der Rechnungsbearbeitung">
+      <bpmn:incoming>Flow_0noxv9u</bpmn:incoming>
+      <bpmn:outgoing>Flow_1g9k8u9</bpmn:outgoing>
+    </bpmn:manualTask>
+  </bpmn:process>
+  <bpmn:message id="Message_1qz34gl" name="Message_1pj5v47" />
+  <bpmn:message id="Message_1kjs8vf" name="Message_224bsao" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0aoxlzn">
+      <bpmndi:BPMNShape id="Participant_041abbg_di" bpmnElement="Participant_041abbg" isHorizontal="true">
+        <dc:Bounds x="130" y="80" width="1228" height="340" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0noxv9u_di" bpmnElement="Flow_0noxv9u">
+        <di:waypoint x="238" y="190" />
+        <di:waypoint x="320" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1g9k8u9_di" bpmnElement="Flow_1g9k8u9">
+        <di:waypoint x="420" y="190" />
+        <di:waypoint x="475" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wrbix7_di" bpmnElement="Flow_1wrbix7">
+        <di:waypoint x="500" y="215" />
+        <di:waypoint x="500" y="330" />
+        <di:waypoint x="820" y="330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="509" y="275" width="12" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kcxfbk_di" bpmnElement="Flow_1kcxfbk">
+        <di:waypoint x="920" y="330" />
+        <di:waypoint x="1052" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0u78861_di" bpmnElement="Flow_0u78861">
+        <di:waypoint x="920" y="190" />
+        <di:waypoint x="1052" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0i2o6ic_di" bpmnElement="Flow_0i2o6ic">
+        <di:waypoint x="525" y="190" />
+        <di:waypoint x="820" y="190" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="662" y="172" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Gateway_05ze6jz_di" bpmnElement="Gateway_05ze6jz" isMarkerVisible="true">
+        <dc:Bounds x="475" y="165" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475" y="126" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1kqlvh4_di" bpmnElement="Event_1kqlvh4">
+        <dc:Bounds x="1052" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1094" y="330" width="71" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1t4g3ps_di" bpmnElement="Activity_1lo7mlr">
+        <dc:Bounds x="820" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l06283_di" bpmnElement="Activity_0nzakaf">
+        <dc:Bounds x="820" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0r1w3vy_di" bpmnElement="Event_0r1w3vy">
+        <dc:Bounds x="202" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="180" y="215" width="80" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0mkbdg2_di" bpmnElement="Event_0mkbdg2">
+        <dc:Bounds x="1052" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1101" y="176" width="58" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xrw6eg_di" bpmnElement="Activity_1be3po4">
+        <dc:Bounds x="320" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

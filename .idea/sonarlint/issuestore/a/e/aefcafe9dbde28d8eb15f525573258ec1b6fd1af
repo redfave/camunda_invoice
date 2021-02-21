@@ -1,0 +1,6 @@
+
+]
+java:S1854"@Remove this useless assignment to local variable "queriedUsers".(Áá‚½8–ÿîø.
+N
+java:S1481"1Remove this unused "queriedUsers" local variable.(Áá‚½8–ÿîø.
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Š¿ä08””¢Ğñ.

@@ -1,0 +1,123 @@
+<form>
+    <div class="form-group">
+        <label>Bitte die Rechnung als PDF hochladen</label>
+        <div class="form-control-static col-md-10">
+            <a cam-file-download="rechnungDatei"></a>
+        </div>
+    </div>
+    </script>
+
+    <div class="form-group">
+        <label for="glaeubiger">Gläubiger</label>
+        <input class="form-control"
+               cam-variable-type="String"
+               cam-variable-name="glaeubiger"
+               name="glaeubiger"
+               readonly/>
+    </div>
+    <div class="form-group">
+        <label for="betrag">Amount</label>
+        <input class="form-control"
+               type="number" min="0"
+               cam-variable-type="Double"
+               cam-variable-name="betrag"
+               name="betrag"
+               readonly/>
+    </div>
+    <div class="form-group">
+        <label for="Rechnungsart">Rechnungsart</label>
+        <select class="form-control"
+                cam-variable-type="String"
+                cam-variable-name="rechnungsart"
+                readonly>
+            <option>Gebäude</option>
+            <option>Lizenz</option>
+            <option>Dienstleistung</option>
+            <option>Catering</option>
+            <option>Hardware</option>
+            <option>Sonstiges</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="amazon">Amazon Rechnung von SATeam/Verwaltung</label>
+        <input class="form-control"
+               type="checkbox"
+               cam-variable-type="Boolean"
+               cam-variable-name="amazon"
+               name="amazon"
+               disabled/>
+    </div>
+    <div class="form-group">
+        <label for="kreditkarte">Mit Kreditkarte Bezahlt</label>
+        <input class="form-control"
+               type="checkbox"
+               cam-variable-type="Boolean"
+               cam-variable-name="kreditkarte"
+               name="kreditkarte"
+               disabled/>
+    </div>
+    <div class="form-group">
+        <label for="mitarbeiter">Bestellende:r</label>
+        <input class="form-control"
+               cam-variable-type="String"
+               cam-variable-name="signOffUser"
+               name="mitarbeiter"
+               readonly/>
+    </div>
+    <div class="form-group">
+        <label for="signOffDate">Datum 1. Abzeichnung</label>
+        <input type="text"
+               class="form-control"
+               cam-variable-type="Date"
+               cam-variable-name="firstSignOffDate"
+               name="signOffDate"
+               readonly/>
+    </div>
+    <div class="form-group">
+        <label for="client">2. Abzeichner</label>
+        <input type="text"
+               cam-variable-name="signOffUser2"
+               cam-variable-type="String"
+               name="client"
+               class="form-control"
+               readonly
+        />
+    </div>
+    <div class="form-group">
+        <label for="zahlungAnMA">Überweisung an Bestellende:n?</label>
+        <input class="form-control"
+               type="checkbox"
+               cam-variable-type="Boolean"
+               cam-variable-name="zahlungAnMA"
+               name="zahlungAnMA"
+               />
+    </div>
+    <script cam-script type="text/form-script">
+    $scope.open = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.dateFieldOpened = true;
+      console.log('State: ',  $scope.dateFieldOpened);
+    };
+</script>
+    <div class="form-group">
+        <label>Datum für eine Terminüberweisung</label>
+        <p class="input-group">
+            <input type="text"
+                   cam-variable-name="terminueberweisungDate"
+                   cam-variable-type="Date"
+                   class="form-control"
+                   uib-datepicker-popup="yyyy-MM-dd'T'HH:mm:ss"
+                   is-open="dateFieldOpened"/>
+
+            <span class="input-group-btn">
+                <button type="button"
+                        class="btn btn-default"
+                        ng-click="open($event)">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+            </span>
+        </p>
+    </div>
+</form>
+
